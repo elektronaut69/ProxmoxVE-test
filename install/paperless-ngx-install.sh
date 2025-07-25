@@ -141,7 +141,7 @@ if [[ "${prompt,,}" =~ ^(y|yes)$ ]]; then
   echo -e "Adminer Database: \e[32m$DB_NAME\e[0m" >>~/paperless.creds
   msg_ok "Installed Adminer"
 fi
-
+<<comment
 msg_info "Setting up admin Paperless-ngx User & Password"
 ## From https://github.com/linuxserver/docker-paperless-ngx/blob/main/root/etc/cont-init.d/99-migrations
 cat <<EOF | python3 /opt/paperless/src/manage.py shell
@@ -157,6 +157,7 @@ echo -e "Paperless-ngx WebUI User: \e[32madmin\e[0m" >>~/paperless.creds
 echo -e "Paperless-ngx WebUI Password: \e[32m$DB_PASS\e[0m" >>~/paperless.creds
 echo "" >>~/paperless.creds
 msg_ok "Set up admin Paperless-ngx User & Password"
+comment
 
 msg_info "Creating Services"
 cat <<EOF >/etc/systemd/system/paperless-scheduler.service
